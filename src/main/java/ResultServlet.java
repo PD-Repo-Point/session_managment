@@ -1,10 +1,8 @@
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import model.Person;
+import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,10 +27,11 @@ public class ResultServlet extends HttpServlet {
 
 
         // Session Tracking --- Using Cookies
-        Cookie[] cookies = req.getCookies();
+        /*Cookie[] cookies = req.getCookies();
         out.println(this.getCookieValuesByName(cookies,"user").get());
         out.println(this.getCookieValuesByName(cookies,"programme").get());
         out.println(this.getCookieValuesByName(cookies,"person").get());
+         */
 
 
         // Request Scope
@@ -45,7 +44,23 @@ public class ResultServlet extends HttpServlet {
         out.println(p);*/
 
 
+        // HttpSession -- Session Scope
+       /* HttpSession session = req.getSession();
 
+        out.println("isLoggedIn? : "+ session.getAttribute("isLoggedIn"));
+
+        User user = (User) session.getAttribute("user");
+        if(user != null)
+            out.println("Username : "+ user.getUsername() + " Password : "+user.getPassword());
+        else
+            out.println("User doesn't exists ... ");*/
+
+
+        // Application Scope
+        out.println("App Name : "+getServletContext().getAttribute("appname"));
+        out.println("Programme : "+ getServletContext().getAttribute("programme"));
+
+        // Application Scope --- Session Scope --- Request Scope
 
     }
 
